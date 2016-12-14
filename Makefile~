@@ -1,5 +1,5 @@
 # Project name
-SOURCE          = final.c
+SOURCE          = wheel.c
 ADDITIONAL      =
 # Get base name so we can create .elf file
 NAME            = $(basename $(SOURCE))
@@ -8,7 +8,7 @@ CPU             = msp430g2553
 # Optimisation level
 OPTIMIZATION    = -O0
 # Extra variables
-CFLAGS          = -mmcu=$(CPU) $(OPTIMIZATION) -std=c99 -Wall -g
+CFLAGS          = -mmcu=$(CPU) $(OPTIMIZATION) -std=c99 -Wall -g -fomit-frame-pointer
 # Libemb library link flags
 LIBEMB          = -lshell -lconio -lserial
 
@@ -23,7 +23,7 @@ endif
 
 # Flash to board with mspdebug
 flash: $(NAME).elf
-	sudo /opt/energia/hardware/tools/msp430/bin/mspdebug rf2500 "prog $(NAME).elf"
+	mspdebug rf2500 "prog $(NAME).elf"
 
 # Erase board
 erase:
